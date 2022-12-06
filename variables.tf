@@ -102,6 +102,6 @@ variable "volumes" {
 
 variable "labels" {
   description = "Additional lables to set."
-  type        = list(map(string))
-  default     = []
+  type        = map(string)
+  default     = {}
 }
