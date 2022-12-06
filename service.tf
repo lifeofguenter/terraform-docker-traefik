@@ -107,11 +107,11 @@ resource "docker_container" "main" {
   }
 
   healthcheck {
-    test         = var.healtcheck.command
-    retries      = var.healtcheck.retries
-    interval     = "${var.healtcheck.interval}s"
-    start_period = "${var.healtcheck.start_period}s"
-    timeout      = "${var.healtcheck.timeout}s"
+    test         = var.healthcheck.command
+    retries      = var.healthcheck.retries
+    interval     = "${var.healthcheck.interval}s"
+    start_period = "${var.healthcheck.start_period}s"
+    timeout      = "${var.healthcheck.timeout}s"
   }
 
   destroy_grace_seconds = 60

@@ -77,7 +77,7 @@ variable "deregistration_delay" {
   default     = 60
 }
 
-variable "healtcheck" {
+variable "healthcheck" {
   description = "The container health check command and associated configuration parameters for the container."
   type = object({
     command      = list(string)
