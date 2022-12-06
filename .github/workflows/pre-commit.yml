@@ -52,4 +52,4 @@ jobs:
         uses: clowdhaus/terraform-composite-actions/pre-commit@v1.8.0
         with:
           terraform-version: ${{ matrix.version }}
-          args: "--all-files --color always --show-diff-on-failure --hide modules"
+          args: "--all-files --color always --show-diff-on-failure"
