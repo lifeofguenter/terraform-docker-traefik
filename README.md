@@ -76,7 +76,7 @@ module "service" {
 | <a name="input_https_entrypoints"></a> [https\_entrypoints](#input\_https\_entrypoints) | List of HTTPS entrypoints. | `list(string)` | `[]` | no |
 | <a name="input_https_middlewares"></a> [https\_middlewares](#input\_https\_middlewares) | List of HTTPS middlewares. | `list(string)` | `[]` | no |
 | <a name="input_image"></a> [image](#input\_image) | The image used to start a container. | `string` | n/a | yes |
-| <a name="input_labels"></a> [labels](#input\_labels) | Additional lables to set. | `list(map(string))` | `[]` | no |
+| <a name="input_labels"></a> [labels](#input\_labels) | Additional lables to set. | `map(string)` | `{}` | no |
 | <a name="input_listener_rule"></a> [listener\_rule](#input\_listener\_rule) | Sets the routing rule. | `string` | n/a | yes |
 | <a name="input_memory"></a> [memory](#input\_memory) | The amount (in MiB) of memory to present to the container. | `number` | n/a | yes |
 | <a name="input_name"></a> [name](#input\_name) | The name of the service. | `string` | n/a | yes |
