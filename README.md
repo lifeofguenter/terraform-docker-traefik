@@ -6,8 +6,37 @@ on [Traefik](https://traefik.io/traefik/) with zero downtime (red/black).
 ## Usage
 
 ```hcl
-module "vpc" {
-  source = "lifeofguenter/traefik/docker"
+module "service" {
+  source  = "lifeofguenter/traefik/docker"
+
+  name          = "foobar-service"
+  image         = "nginx"
+  memory        = 256
+  listener_rule = "Host(`foobar.mydomain.com`)"
+  revision      = var.build_number
+
+  service_network = docker_network.service.name
+  traefik_network = "services"
+
+  certresolver = "basic"
+
+  http_entrypoints = ["web"]
+  http_middlewares = ["https_redirect@file"]
+
+  https_entrypoints = ["web_secure"]
+  https_middlewares = ["compression@file"]
+
+  environment = {
+    VERSION = var.build_number
+  }
+
+  healthcheck = {
+    command      = ["CMD-SHELL", "wget -q --spider --proxy=off localhost:3000/ || exit 1"]
+    retries      = 3
+    interval     = 20
+    start_period = 60
+    timeout      = 5
+  }
 }
 ```
 
@@ -53,6 +82,7 @@ module "vpc" {
 | <a name="input_revision"></a> [revision](#input\_revision) | Revision number of this service. | `number` | n/a | yes |
 | <a name="input_service_network"></a> [service\_network](#input\_service\_network) | Name of the service docker network. | `string` | `null` | no |
 | <a name="input_traefik_network"></a> [traefik\_network](#input\_traefik\_network) | Name of the Traefik docker network. | `string` | `null` | no |
+| <a name="input_volumes"></a> [volumes](#input\_volumes) | List of volumes to attach. | <pre>list(object({<br>    container_path = optional(string, null)<br>    from_container = optional(string, null)<br>    host_path      = optional(string, null)<br>    read_only      = optional(bool, false)<br>    volume_name    = optional(string, null)<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 

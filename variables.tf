@@ -87,3 +87,15 @@ variable "healthcheck" {
     retries      = optional(number, 3)
   })
 }
+
+variable "volumes" {
+  description = "List of volumes to attach."
+  type = list(object({
+    container_path = optional(string, null)
+    from_container = optional(string, null)
+    host_path      = optional(string, null)
+    read_only      = optional(bool, false)
+    volume_name    = optional(string, null)
+  }))
+  default = []
+}

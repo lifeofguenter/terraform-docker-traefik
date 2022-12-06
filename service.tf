@@ -95,6 +95,18 @@ resource "docker_container" "main" {
     }
   }
 
+  ### Volumes ###
+  dynamic "volumes" {
+    for_each = var.volumes
+    content {
+      container_path = volumes.value["container_path"]
+      from_container = volumes.value["from_container"]
+      host_path      = volumes.value["host_path"]
+      read_only      = volumes.value["read_only"]
+      volume_name    = volumes.value["volume_name"]
+    }
+  }
+
   ### Red/black ###
   labels {
     label = "traefik.http.routers.${local.router_name_http}.priority"
