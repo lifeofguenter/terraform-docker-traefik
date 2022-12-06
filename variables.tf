@@ -99,3 +99,9 @@ variable "volumes" {
   }))
   default = []
 }
+
+variable "labels" {
+  description = "Additional lables to set."
+  type        = list(map(string))
+  default     = []
+}

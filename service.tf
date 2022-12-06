@@ -95,6 +95,15 @@ resource "docker_container" "main" {
     }
   }
 
+  ### Additional labels ###
+  dynamic "labels" {
+    for_each = var.labels
+    content {
+      label = labels.key
+      value = labels.value
+    }
+  }
+
   ### Volumes ###
   dynamic "volumes" {
     for_each = var.volumes
