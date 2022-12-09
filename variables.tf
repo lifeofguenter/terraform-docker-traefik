@@ -89,13 +89,24 @@ variable "healthcheck" {
 }
 
 variable "volumes" {
-  description = "List of volumes to attach."
+  description = "List for mounting volumes in the container."
   type = list(object({
     container_path = optional(string, null)
     from_container = optional(string, null)
     host_path      = optional(string, null)
     read_only      = optional(bool, false)
     volume_name    = optional(string, null)
+  }))
+  default = []
+}
+
+variable "mounts" {
+  description = "List for mounts to be added to containers created as part of the service."
+  type = list(object({
+    type      = string
+    target    = string
+    source    = optional(string, null)
+    read_only = optional(bool, false)
   }))
   default = []
 }
