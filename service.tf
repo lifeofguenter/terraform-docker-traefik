@@ -13,6 +13,9 @@ resource "docker_container" "main" {
 
   env = [for k, v in var.environment : "${k}=${v}"]
 
+  entrypoint = var.entrypoint
+  command    = var.command
+
   labels {
     label = "traefik.enable"
     value = "true"

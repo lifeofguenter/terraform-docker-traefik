@@ -1,5 +1,7 @@
 # Docker Traefik Terraform module
 
+[![pre-commit](https://github.com/lifeofguenter/terraform-docker-traefik/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/lifeofguenter/terraform-docker-traefik/actions/workflows/pre-commit.yml)
+
 Terraform module which deploys a [Docker service](https://doc.traefik.io/traefik/providers/docker/)
 on [Traefik](https://traefik.io/traefik/) with zero downtime (red/black).
 
@@ -68,7 +70,9 @@ module "service" {
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_certresolver"></a> [certresolver](#input\_certresolver) | Name of certificate resolver. | `string` | `null` | no |
+| <a name="input_command"></a> [command](#input\_command) | The command to use to start the container. | `list(string)` | `[]` | no |
 | <a name="input_deregistration_delay"></a> [deregistration\_delay](#input\_deregistration\_delay) | Amount of seconds to wait for open connections to drain before stopping the container. | `number` | `60` | no |
+| <a name="input_entrypoint"></a> [entrypoint](#input\_entrypoint) | The command to use as the Entrypoint for the container. | `list(string)` | `[]` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment variables to pass to a container. | `map(string)` | `{}` | no |
 | <a name="input_healthcheck"></a> [healthcheck](#input\_healthcheck) | The container health check command and associated configuration parameters for the container. | <pre>object({<br>    command      = list(string)<br>    interval     = optional(number, 30)<br>    timeout      = optional(number, 30)<br>    start_period = optional(number, 0)<br>    retries      = optional(number, 3)<br>  })</pre> | n/a | yes |
 | <a name="input_http_entrypoints"></a> [http\_entrypoints](#input\_http\_entrypoints) | List of HTTP entrypoints. | `list(string)` | `[]` | no |

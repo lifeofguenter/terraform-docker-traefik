@@ -116,3 +116,15 @@ variable "labels" {
   type        = map(string)
   default     = {}
 }
+
+variable "command" {
+  description = "The command to use to start the container."
+  type        = list(string)
+  default     = []
+}
+
+variable "entrypoint" {
+  description = "The command to use as the Entrypoint for the container."
+  type        = list(string)
+  default     = []
+}
