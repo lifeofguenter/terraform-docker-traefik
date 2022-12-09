@@ -79,11 +79,12 @@ module "service" {
 | <a name="input_labels"></a> [labels](#input\_labels) | Additional lables to set. | `map(string)` | `{}` | no |
 | <a name="input_listener_rule"></a> [listener\_rule](#input\_listener\_rule) | Sets the routing rule. | `string` | n/a | yes |
 | <a name="input_memory"></a> [memory](#input\_memory) | The amount (in MiB) of memory to present to the container. | `number` | n/a | yes |
+| <a name="input_mounts"></a> [mounts](#input\_mounts) | List for mounts to be added to containers created as part of the service. | <pre>list(object({<br>    type      = string<br>    target    = string<br>    source    = optional(string, null)<br>    read_only = optional(bool, false)<br>  }))</pre> | `[]` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the service. | `string` | n/a | yes |
 | <a name="input_revision"></a> [revision](#input\_revision) | Revision number of this service. | `number` | n/a | yes |
 | <a name="input_service_network"></a> [service\_network](#input\_service\_network) | Name of the service docker network. | `string` | `null` | no |
 | <a name="input_traefik_network"></a> [traefik\_network](#input\_traefik\_network) | Name of the Traefik docker network. | `string` | `null` | no |
-| <a name="input_volumes"></a> [volumes](#input\_volumes) | List of volumes to attach. | <pre>list(object({<br>    container_path = optional(string, null)<br>    from_container = optional(string, null)<br>    host_path      = optional(string, null)<br>    read_only      = optional(bool, false)<br>    volume_name    = optional(string, null)<br>  }))</pre> | `[]` | no |
+| <a name="input_volumes"></a> [volumes](#input\_volumes) | List for mounting volumes in the container. | <pre>list(object({<br>    container_path = optional(string, null)<br>    from_container = optional(string, null)<br>    host_path      = optional(string, null)<br>    read_only      = optional(bool, false)<br>    volume_name    = optional(string, null)<br>  }))</pre> | `[]` | no |
 
 ## Outputs
 

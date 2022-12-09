@@ -116,6 +116,17 @@ resource "docker_container" "main" {
     }
   }
 
+  ### Mounts ###
+  dynamic "mounts" {
+    for_each = var.mounts
+    content {
+      type      = mounts.value["type"]
+      target    = mounts.value["target"]
+      source    = mounts.value["source"]
+      read_only = mounts.value["read_only"]
+    }
+  }
+
   ### Red/black ###
   labels {
     label = "traefik.http.routers.${local.router_name_http}.priority"
