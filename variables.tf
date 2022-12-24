@@ -128,3 +128,15 @@ variable "entrypoint" {
   type        = list(string)
   default     = []
 }
+
+variable "cpu_set" {
+  description = "A comma-separated list or hyphen-separated range of CPUs a container can use."
+  type        = number
+  default     = null
+}
+
+variable "cpu_shares" {
+  description = "CPU shares (relative weight) for the container."
+  type        = number
+  default     = null
+}
