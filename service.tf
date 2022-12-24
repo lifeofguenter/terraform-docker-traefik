@@ -8,8 +8,10 @@ resource "docker_container" "main" {
   name  = "${var.name}-${var.revision}"
   image = docker_image.main.name
 
-  memory  = var.memory
-  restart = "always"
+  cpu_set    = var.cpu_set
+  cpu_shares = var.cpu_shares
+  memory     = var.memory
+  restart    = "always"
 
   env = [for k, v in var.environment : "${k}=${v}"]
 
