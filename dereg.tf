@@ -5,4 +5,8 @@ resource "time_sleep" "grace" {
   triggers = {
     container_name = docker_container.main.name
   }
+
+  lifecycle {
+    create_before_destroy = true
+  }
 }
