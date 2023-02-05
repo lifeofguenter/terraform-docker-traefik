@@ -45,7 +45,7 @@ resource "docker_container" "main" {
     for_each = length(var.cert_sans) > 1 ? [1] : [0]
     content {
       label = "traefik.http.routers.${local.router_name_https}.tls.domains[0].sans"
-      value = join(",", slice(var.cert_sans, 1))
+      value = join(",", slice(var.cert_sans, 1, length(var.cert_sans) - 1))
     }
   }
 
