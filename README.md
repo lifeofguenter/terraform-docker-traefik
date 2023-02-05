@@ -53,7 +53,7 @@ module "service" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_docker"></a> [docker](#provider\_docker) | 2.24.0 |
+| <a name="provider_docker"></a> [docker](#provider\_docker) | 3.0.1 |
 | <a name="provider_time"></a> [time](#provider\_time) | 0.9.1 |
 
 ## Resources
@@ -69,6 +69,7 @@ module "service" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_cert_sans"></a> [cert\_sans](#input\_cert\_sans) | List of SANs for the cert. | `list(string)` | `[]` | no |
 | <a name="input_certresolver"></a> [certresolver](#input\_certresolver) | Name of certificate resolver. | `string` | `null` | no |
 | <a name="input_command"></a> [command](#input\_command) | The command to use to start the container. | `list(string)` | `[]` | no |
 | <a name="input_cpu_set"></a> [cpu\_set](#input\_cpu\_set) | A comma-separated list or hyphen-separated range of CPUs a container can use. | `string` | `null` | no |
