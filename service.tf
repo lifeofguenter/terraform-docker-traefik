@@ -32,6 +32,23 @@ resource "docker_container" "main" {
     }
   }
 
+  ### Cert SANs
+  dynamic "labels" {
+    for_each = length(var.cert_sans) > 0 ? [1] : [0]
+    content {
+      label = "traefik.http.routers.${local.router_name_https}.tls.domains[0].main"
+      value = var.cert_sans[0]
+    }
+  }
+
+  dynamic "labels" {
+    for_each = length(var.cert_sans) > 1 ? [1] : [0]
+    content {
+      label = "traefik.http.routers.${local.router_name_https}.tls.domains[0].sans"
+      value = join(",", slice(var.cert_sans, 1))
+    }
+  }
+
   ### Entrypoints
   dynamic "labels" {
     for_each = length(var.http_entrypoints) > 0 ? [1] : [0]

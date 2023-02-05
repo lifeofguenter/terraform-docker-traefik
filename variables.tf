@@ -66,6 +66,12 @@ variable "certresolver" {
   default     = null
 }
 
+variable "cert_sans" {
+  description = "List of SANs for the cert."
+  type        = list(string)
+  default     = []
+}
+
 variable "listener_rule" {
   description = "Sets the routing rule."
   type        = string
