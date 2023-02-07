@@ -2,6 +2,8 @@ locals {
   router_name       = replace(var.name, "-", "_")
   router_name_http  = format("%s_http_%s", local.router_name, var.revision)
   router_name_https = format("%s_https_%s", local.router_name, var.revision)
+
+  enable_tls = var.certresolver == null && length(var.https_entrypoints) > 0 ? true : false
 }
 
 resource "docker_container" "main" {
@@ -21,6 +23,15 @@ resource "docker_container" "main" {
   labels {
     label = "traefik.enable"
     value = "true"
+  }
+
+  ### custom tls cert
+  dynamic "labels" {
+    for_each = local.enable_tls ? [1] : [0]
+    content {
+      label = "traefik.http.routers.${local.router_name_https}.tls"
+      value = "true"
+    }
   }
 
   ### Cert resolver
