@@ -42,7 +42,7 @@ resource "docker_container" "main" {
     for_each = var.certresolver != null ? [1] : [0]
     content {
       label = "traefik.http.routers.${local.router_name_https}.tls.certresolver"
-      value = var.certresolver
+      value = var.certresolver != null ? var.certresolver : ""
     }
   }
 
