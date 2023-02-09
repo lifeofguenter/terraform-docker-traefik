@@ -131,6 +131,39 @@ resource "docker_container" "main" {
     }
   }
 
+  ### Container port ###
+  dynamic "labels" {
+    for_each = var.container_port != null ? [1] : []
+    content {
+      label = "traefik.http.routers.${local.router_name_http}.service"
+      value = local.router_name_http
+    }
+  }
+
+  dynamic "labels" {
+    for_each = var.container_port != null ? [1] : []
+    content {
+      label = "traefik.http.services.${local.router_name_http}.loadbalancer.server.port"
+      value = tostring(var.container_port)
+    }
+  }
+
+  dynamic "labels" {
+    for_each = var.container_port != null ? [1] : []
+    content {
+      label = "traefik.http.routers.${local.router_name_https}.service"
+      value = local.router_name_https
+    }
+  }
+
+  dynamic "labels" {
+    for_each = var.container_port != null ? [1] : []
+    content {
+      label = "traefik.http.services.${local.router_name_https}.loadbalancer.server.port"
+      value = tostring(var.container_port)
+    }
+  }
+
   ### Additional labels ###
   dynamic "labels" {
     for_each = var.labels

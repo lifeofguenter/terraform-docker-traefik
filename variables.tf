@@ -146,3 +146,9 @@ variable "cpu_shares" {
   type        = number
   default     = null
 }
+
+variable "container_port" {
+  description = "Explicit container port to forward traffic to."
+  type        = number
+  default     = null
+}
