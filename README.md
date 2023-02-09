@@ -72,6 +72,7 @@ module "service" {
 | <a name="input_cert_sans"></a> [cert\_sans](#input\_cert\_sans) | List of SANs for the cert. | `list(string)` | `[]` | no |
 | <a name="input_certresolver"></a> [certresolver](#input\_certresolver) | Name of certificate resolver. | `string` | `null` | no |
 | <a name="input_command"></a> [command](#input\_command) | The command to use to start the container. | `list(string)` | `[]` | no |
+| <a name="input_container_port"></a> [container\_port](#input\_container\_port) | Explicit container port to forward traffic to. | `number` | `null` | no |
 | <a name="input_cpu_set"></a> [cpu\_set](#input\_cpu\_set) | A comma-separated list or hyphen-separated range of CPUs a container can use. | `string` | `null` | no |
 | <a name="input_cpu_shares"></a> [cpu\_shares](#input\_cpu\_shares) | CPU shares (relative weight) for the container. | `number` | `null` | no |
 | <a name="input_deregistration_delay"></a> [deregistration\_delay](#input\_deregistration\_delay) | Amount of seconds to wait for open connections to drain before stopping the container. | `number` | `60` | no |
