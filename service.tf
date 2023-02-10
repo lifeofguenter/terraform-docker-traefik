@@ -6,7 +6,7 @@ locals {
   enable_tls = var.certresolver == null && length(var.https_entrypoints) > 0 ? true : false
 
   sans_main = length(var.cert_sans) > 0 ? var.cert_sans[0] : ""
-  sans_alts = length(var.cert_sans) > 1 ? join(",", slice(var.cert_sans, 1, length(var.cert_sans) - 1)) : ""
+  sans_alts = length(var.cert_sans) > 1 ? join(",", slice(var.cert_sans, 1, length(var.cert_sans))) : ""
 }
 
 resource "docker_container" "main" {
