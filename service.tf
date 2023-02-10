@@ -30,7 +30,7 @@ resource "docker_container" "main" {
 
   ### custom tls cert
   dynamic "labels" {
-    for_each = local.enable_tls ? [1] : [0]
+    for_each = local.enable_tls ? [1] : []
     content {
       label = "traefik.http.routers.${local.router_name_https}.tls"
       value = "true"
@@ -39,16 +39,16 @@ resource "docker_container" "main" {
 
   ### Cert resolver
   dynamic "labels" {
-    for_each = var.certresolver != null ? [1] : [0]
+    for_each = var.certresolver != null ? [1] : []
     content {
       label = "traefik.http.routers.${local.router_name_https}.tls.certresolver"
-      value = var.certresolver != null ? var.certresolver : ""
+      value = var.certresolver
     }
   }
 
   ### Cert SANs
   dynamic "labels" {
-    for_each = length(var.cert_sans) > 0 ? [1] : [0]
+    for_each = length(var.cert_sans) > 0 ? [1] : []
     content {
       label = "traefik.http.routers.${local.router_name_https}.tls.domains[0].main"
       value = local.sans_main
@@ -56,7 +56,7 @@ resource "docker_container" "main" {
   }
 
   dynamic "labels" {
-    for_each = length(var.cert_sans) > 1 ? [1] : [0]
+    for_each = length(var.cert_sans) > 1 ? [1] : []
     content {
       label = "traefik.http.routers.${local.router_name_https}.tls.domains[0].sans"
       value = local.sans_alts
@@ -65,7 +65,7 @@ resource "docker_container" "main" {
 
   ### Entrypoints
   dynamic "labels" {
-    for_each = length(var.http_entrypoints) > 0 ? [1] : [0]
+    for_each = length(var.http_entrypoints) > 0 ? [1] : []
     content {
       label = "traefik.http.routers.${local.router_name_http}.entryPoints"
       value = join(",", var.http_entrypoints)
@@ -73,7 +73,7 @@ resource "docker_container" "main" {
   }
 
   dynamic "labels" {
-    for_each = length(var.https_entrypoints) > 0 ? [1] : [0]
+    for_each = length(var.https_entrypoints) > 0 ? [1] : []
     content {
       label = "traefik.http.routers.${local.router_name_https}.entryPoints"
       value = join(",", var.https_entrypoints)
@@ -93,7 +93,7 @@ resource "docker_container" "main" {
 
   ### Middlewares
   dynamic "labels" {
-    for_each = length(var.http_middlewares) > 0 ? [1] : [0]
+    for_each = length(var.http_middlewares) > 0 ? [1] : []
     content {
       label = "traefik.http.routers.${local.router_name_http}.middlewares"
       value = join(",", var.http_middlewares)
@@ -101,7 +101,7 @@ resource "docker_container" "main" {
   }
 
   dynamic "labels" {
-    for_each = length(var.https_middlewares) > 0 ? [1] : [0]
+    for_each = length(var.https_middlewares) > 0 ? [1] : []
     content {
       label = "traefik.http.routers.${local.router_name_https}.middlewares"
       value = join(",", var.https_middlewares)
