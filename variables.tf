@@ -86,7 +86,7 @@ variable "deregistration_delay" {
 variable "healthcheck" {
   description = "The container health check command and associated configuration parameters for the container."
   type = object({
-    command      = list(string)
+    command      = optional(list(string), [])
     interval     = optional(number, 30)
     timeout      = optional(number, 30)
     start_period = optional(number, 0)
