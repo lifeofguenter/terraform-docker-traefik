@@ -208,7 +208,7 @@ resource "docker_container" "main" {
   }
 
   dynamic "healthcheck" {
-    for_each = length(var.healthcheck.command) > 1 ? [1] : []
+    for_each = var.healthcheck != null ? [1] : []
     content {
       test         = var.healthcheck.command
       retries      = var.healthcheck.retries
