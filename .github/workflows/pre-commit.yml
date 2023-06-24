@@ -26,7 +26,7 @@ jobs:
 
       - name: Extract Terraform min/max versions
         id: minMax
-        uses: clowdhaus/terraform-min-max@v1.2.5
+        uses: clowdhaus/terraform-min-max@v1.2.6
 
     outputs:
       minVersion: ${{ steps.minMax.outputs.minVersion }}
