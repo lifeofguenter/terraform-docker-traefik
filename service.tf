@@ -207,12 +207,15 @@ resource "docker_container" "main" {
     value = var.revision
   }
 
-  healthcheck {
-    test         = var.healthcheck.command
-    retries      = var.healthcheck.retries
-    interval     = "${var.healthcheck.interval}s"
-    start_period = "${var.healthcheck.start_period}s"
-    timeout      = "${var.healthcheck.timeout}s"
+  dynamic "healthcheck" {
+    for_each = length(var.healthcheck.command) > 1 ? [1] : []
+    content {
+      test         = var.healthcheck.command
+      retries      = var.healthcheck.retries
+      interval     = "${var.healthcheck.interval}s"
+      start_period = "${var.healthcheck.start_period}s"
+      timeout      = "${var.healthcheck.timeout}s"
+    }
   }
 
   destroy_grace_seconds = 60
