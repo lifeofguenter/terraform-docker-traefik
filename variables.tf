@@ -153,3 +153,9 @@ variable "container_port" {
   type        = number
   default     = null
 }
+
+variable "basic_auth_users" {
+  description = "List of authorized users."
+  type        = list(string)
+  default     = []
+}

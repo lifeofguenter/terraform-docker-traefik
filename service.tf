@@ -7,6 +7,11 @@ locals {
 
   sans_main = length(var.cert_sans) > 0 ? var.cert_sans[0] : ""
   sans_alts = length(var.cert_sans) > 1 ? join(",", slice(var.cert_sans, 1, length(var.cert_sans))) : ""
+
+  basicauth_middleware = length(var.basic_auth_users) > 0 ? format("%s_basicauth_%s", local.router_name, var.revision) : ""
+
+  http_middlewares  = compact(concat(var.http_middlewares, local.basicauth_middleware))
+  https_middlewares = compact(concat(var.https_middlewares, local.basicauth_middleware))
 }
 
 resource "docker_container" "main" {
@@ -96,7 +101,7 @@ resource "docker_container" "main" {
     for_each = length(var.http_middlewares) > 0 ? [1] : []
     content {
       label = "traefik.http.routers.${local.router_name_http}.middlewares"
-      value = join(",", var.http_middlewares)
+      value = join(",", local.http_middlewares)
     }
   }
 
@@ -104,7 +109,7 @@ resource "docker_container" "main" {
     for_each = length(var.https_middlewares) > 0 ? [1] : []
     content {
       label = "traefik.http.routers.${local.router_name_https}.middlewares"
-      value = join(",", var.https_middlewares)
+      value = join(",", local.https_middlewares)
     }
   }
 
@@ -161,6 +166,14 @@ resource "docker_container" "main" {
     content {
       label = "traefik.http.services.${local.router_name_https}.loadbalancer.server.port"
       value = tostring(var.container_port)
+    }
+  }
+
+  dynamic "labels" {
+    for_each = length(var.basic_auth_users) > 0 ? [1] : []
+    content {
+      label = "traefik.http.middlewares.${local.basicauth_middleware}.basicauth.users"
+      value = join(",", var.basic_auth_users)
     }
   }
 
