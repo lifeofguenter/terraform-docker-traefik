@@ -8,7 +8,8 @@ locals {
   sans_main = length(var.cert_sans) > 0 ? var.cert_sans[0] : ""
   sans_alts = length(var.cert_sans) > 1 ? join(",", slice(var.cert_sans, 1, length(var.cert_sans))) : ""
 
-  basicauth_middleware = length(var.basic_auth_users) > 0 ? format("%s_basicauth_%s", local.router_name, var.revision) : ""
+  basicauth_name       = format("%s_basicauth_%s", local.router_name, var.revision)
+  basicauth_middleware = length(var.basic_auth_users) > 0 ? "${local.basicauth_name}@docker" : ""
 
   http_middlewares  = compact(concat(var.http_middlewares, [local.basicauth_middleware]))
   https_middlewares = compact(concat(var.https_middlewares, [local.basicauth_middleware]))
@@ -172,7 +173,7 @@ resource "docker_container" "main" {
   dynamic "labels" {
     for_each = length(var.basic_auth_users) > 0 ? [1] : []
     content {
-      label = "traefik.http.middlewares.${local.basicauth_middleware}.basicauth.users"
+      label = "traefik.http.middlewares.${local.basicauth_name}.basicauth.users"
       value = join(",", var.basic_auth_users)
     }
   }
