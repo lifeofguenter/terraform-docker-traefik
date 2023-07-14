@@ -69,6 +69,7 @@ module "service" {
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_basic_auth_users"></a> [basic\_auth\_users](#input\_basic\_auth\_users) | List of authorized users. | `list(string)` | `[]` | no |
 | <a name="input_cert_sans"></a> [cert\_sans](#input\_cert\_sans) | List of SANs for the cert. | `list(string)` | `[]` | no |
 | <a name="input_certresolver"></a> [certresolver](#input\_certresolver) | Name of certificate resolver. | `string` | `null` | no |
 | <a name="input_command"></a> [command](#input\_command) | The command to use to start the container. | `list(string)` | `[]` | no |
