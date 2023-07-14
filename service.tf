@@ -10,8 +10,8 @@ locals {
 
   basicauth_middleware = length(var.basic_auth_users) > 0 ? format("%s_basicauth_%s", local.router_name, var.revision) : ""
 
-  http_middlewares  = compact(concat(var.http_middlewares, local.basicauth_middleware))
-  https_middlewares = compact(concat(var.https_middlewares, local.basicauth_middleware))
+  http_middlewares  = compact(concat(var.http_middlewares, [local.basicauth_middleware]))
+  https_middlewares = compact(concat(var.https_middlewares, [local.basicauth_middleware]))
 }
 
 resource "docker_container" "main" {
