@@ -210,6 +210,17 @@ resource "docker_container" "main" {
     }
   }
 
+  ### Publish ###
+  dynamic "ports" {
+    for_each = var.publish
+    content {
+      internal = ports.value["internal"]
+      external = ports.value["external"]
+      ip       = ports.value["ip"]
+      protocol = ports.value["protocol"]
+    }
+  }
+
   ### Red/black ###
   labels {
     label = "traefik.http.routers.${local.router_name_http}.priority"
