@@ -54,7 +54,7 @@ module "service" {
 | Name | Version |
 |------|---------|
 | <a name="provider_docker"></a> [docker](#provider\_docker) | 3.0.2 |
-| <a name="provider_time"></a> [time](#provider\_time) | 0.9.1 |
+| <a name="provider_time"></a> [time](#provider\_time) | 0.11.1 |
 
 ## Resources
 
@@ -90,6 +90,7 @@ module "service" {
 | <a name="input_memory"></a> [memory](#input\_memory) | The amount (in MiB) of memory to present to the container. | `number` | n/a | yes |
 | <a name="input_mounts"></a> [mounts](#input\_mounts) | List for mounts to be added to containers created as part of the service. | <pre>list(object({<br>    type      = string<br>    target    = string<br>    source    = optional(string, null)<br>    read_only = optional(bool, false)<br>  }))</pre> | `[]` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the service. | `string` | n/a | yes |
+| <a name="input_publish"></a> [publish](#input\_publish) | List of ports to publish. | <pre>list(object({<br>    internal = number<br>    external = number<br>    ip       = optional(string, null)<br>    protocol = optional(string, "tcp")<br>  }))</pre> | `[]` | no |
 | <a name="input_revision"></a> [revision](#input\_revision) | Revision number of this service. | `number` | n/a | yes |
 | <a name="input_service_network"></a> [service\_network](#input\_service\_network) | Name of the service docker network. | `string` | `null` | no |
 | <a name="input_traefik_network"></a> [traefik\_network](#input\_traefik\_network) | Name of the Traefik docker network. | `string` | `null` | no |
