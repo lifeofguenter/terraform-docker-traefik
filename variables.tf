@@ -159,3 +159,14 @@ variable "basic_auth_users" {
   type        = list(string)
   default     = []
 }
+
+variable "publish" {
+  description = "List of ports to publish."
+  type = list(object({
+    internal = number
+    external = number
+    ip       = optional(string, null)
+    protocol = optional(string, "tcp")
+  }))
+  default = []
+}
