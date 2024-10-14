@@ -49,7 +49,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run pre-commit ${{ matrix.version }}
-        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.11.0
+        uses: clowdhaus/terraform-composite-actions/pre-commit@v1.11.1
         with:
           terraform-version: ${{ matrix.version }}
           args: "--all-files --color always --show-diff-on-failure"
