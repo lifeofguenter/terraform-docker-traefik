@@ -170,3 +170,13 @@ variable "publish" {
   }))
   default = []
 }
+
+variable "header_sts" {
+  description = "Add the Strict-Transport-Security header to the response."
+  type = object({
+    seconds            = optional(number, 0)
+    include_subdomains = optional(bool, false)
+    preload            = optional(bool, false)
+  })
+  default = null
+}

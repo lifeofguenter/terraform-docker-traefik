@@ -9,10 +9,12 @@ locals {
   sans_alts = length(var.cert_sans) > 1 ? join(",", slice(var.cert_sans, 1, length(var.cert_sans))) : ""
 
   basicauth_name       = format("%s_basicauth_%s", local.router_name, var.revision)
-  basicauth_middleware = length(var.basic_auth_users) > 0 ? "${local.basicauth_name}@docker" : ""
+  middleware_basicauth = length(var.basic_auth_users) > 0 ? "${local.basicauth_name}@docker" : ""
 
-  http_middlewares  = compact(concat(var.http_middlewares, [local.basicauth_middleware]))
-  https_middlewares = compact(concat(var.https_middlewares, [local.basicauth_middleware]))
+  middleware_sts = var.header_sts != null ? "sts@docker" : ""
+
+  http_middlewares  = compact(concat(var.http_middlewares, [local.middleware_basicauth], [local.middleware_sts]))
+  https_middlewares = compact(concat(var.https_middlewares, [local.middleware_basicauth], [local.middleware_sts]))
 }
 
 resource "docker_container" "main" {
@@ -175,6 +177,31 @@ resource "docker_container" "main" {
     content {
       label = "traefik.http.middlewares.${local.basicauth_name}.basicauth.users"
       value = join(",", var.basic_auth_users)
+    }
+  }
+
+  ### Headers: sts ###
+  dynamic "labels" {
+    for_each = var.header_sts != null ? [1] : []
+    content {
+      label = "traefik.http.middlewares.sts.headers.stsSeconds"
+      value = var.header_sts.seconds
+    }
+  }
+
+  dynamic "labels" {
+    for_each = var.header_sts != null ? [1] : []
+    content {
+      label = "traefik.http.middlewares.sts.headers.stsIncludeSubdomains"
+      value = var.header_sts.include_subdomains
+    }
+  }
+
+  dynamic "labels" {
+    for_each = var.header_sts != null ? [1] : []
+    content {
+      label = "traefik.http.middlewares.sts.headers.stsPreload"
+      value = var.header_sts.preload
     }
   }
 
