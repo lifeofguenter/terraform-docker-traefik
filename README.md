@@ -42,7 +42,7 @@ module "service" {
 }
 ```
 
-<!-- BEGIN_TF_DOCS -->
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
@@ -103,7 +103,7 @@ module "service" {
 |------|-------------|
 | <a name="output_docker_image_id"></a> [docker\_image\_id](#output\_docker\_image\_id) | The ID of the image. |
 | <a name="output_docker_image_name"></a> [docker\_image\_name](#output\_docker\_image\_name) | The name of the Docker image. |
-<!-- END_TF_DOCS -->
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
 ## Contribute
 
