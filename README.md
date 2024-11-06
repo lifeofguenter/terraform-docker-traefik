@@ -42,7 +42,7 @@ module "service" {
 }
 ```
 
-<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
@@ -79,7 +79,8 @@ module "service" {
 | <a name="input_deregistration_delay"></a> [deregistration\_delay](#input\_deregistration\_delay) | Amount of seconds to wait for open connections to drain before stopping the container. | `number` | `60` | no |
 | <a name="input_entrypoint"></a> [entrypoint](#input\_entrypoint) | The command to use as the Entrypoint for the container. | `list(string)` | `[]` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment variables to pass to a container. | `map(string)` | `{}` | no |
-| <a name="input_healthcheck"></a> [healthcheck](#input\_healthcheck) | The container health check command and associated configuration parameters for the container. | <pre>object({<br>    command      = list(string)<br>    interval     = optional(number, 30)<br>    timeout      = optional(number, 30)<br>    start_period = optional(number, 0)<br>    retries      = optional(number, 3)<br>  })</pre> | `null` | no |
+| <a name="input_header_sts"></a> [header\_sts](#input\_header\_sts) | Add the Strict-Transport-Security header to the response. | <pre>object({<br/>    seconds            = optional(number, 0)<br/>    include_subdomains = optional(bool, false)<br/>    preload            = optional(bool, false)<br/>  })</pre> | `null` | no |
+| <a name="input_healthcheck"></a> [healthcheck](#input\_healthcheck) | The container health check command and associated configuration parameters for the container. | <pre>object({<br/>    command      = list(string)<br/>    interval     = optional(number, 30)<br/>    timeout      = optional(number, 30)<br/>    start_period = optional(number, 0)<br/>    retries      = optional(number, 3)<br/>  })</pre> | `null` | no |
 | <a name="input_http_entrypoints"></a> [http\_entrypoints](#input\_http\_entrypoints) | List of HTTP entrypoints. | `list(string)` | `[]` | no |
 | <a name="input_http_middlewares"></a> [http\_middlewares](#input\_http\_middlewares) | List of HTTP middlewares. | `list(string)` | `[]` | no |
 | <a name="input_https_entrypoints"></a> [https\_entrypoints](#input\_https\_entrypoints) | List of HTTPS entrypoints. | `list(string)` | `[]` | no |
@@ -88,13 +89,13 @@ module "service" {
 | <a name="input_labels"></a> [labels](#input\_labels) | Additional lables to set. | `map(string)` | `{}` | no |
 | <a name="input_listener_rule"></a> [listener\_rule](#input\_listener\_rule) | Sets the routing rule. | `string` | n/a | yes |
 | <a name="input_memory"></a> [memory](#input\_memory) | The amount (in MiB) of memory to present to the container. | `number` | n/a | yes |
-| <a name="input_mounts"></a> [mounts](#input\_mounts) | List for mounts to be added to containers created as part of the service. | <pre>list(object({<br>    type      = string<br>    target    = string<br>    source    = optional(string, null)<br>    read_only = optional(bool, false)<br>  }))</pre> | `[]` | no |
+| <a name="input_mounts"></a> [mounts](#input\_mounts) | List for mounts to be added to containers created as part of the service. | <pre>list(object({<br/>    type      = string<br/>    target    = string<br/>    source    = optional(string, null)<br/>    read_only = optional(bool, false)<br/>  }))</pre> | `[]` | no |
 | <a name="input_name"></a> [name](#input\_name) | The name of the service. | `string` | n/a | yes |
-| <a name="input_publish"></a> [publish](#input\_publish) | List of ports to publish. | <pre>list(object({<br>    internal = number<br>    external = number<br>    ip       = optional(string, null)<br>    protocol = optional(string, "tcp")<br>  }))</pre> | `[]` | no |
+| <a name="input_publish"></a> [publish](#input\_publish) | List of ports to publish. | <pre>list(object({<br/>    internal = number<br/>    external = number<br/>    ip       = optional(string, null)<br/>    protocol = optional(string, "tcp")<br/>  }))</pre> | `[]` | no |
 | <a name="input_revision"></a> [revision](#input\_revision) | Revision number of this service. | `number` | n/a | yes |
 | <a name="input_service_network"></a> [service\_network](#input\_service\_network) | Name of the service docker network. | `string` | `null` | no |
 | <a name="input_traefik_network"></a> [traefik\_network](#input\_traefik\_network) | Name of the Traefik docker network. | `string` | `null` | no |
-| <a name="input_volumes"></a> [volumes](#input\_volumes) | List for mounting volumes in the container. | <pre>list(object({<br>    container_path = optional(string, null)<br>    from_container = optional(string, null)<br>    host_path      = optional(string, null)<br>    read_only      = optional(bool, false)<br>    volume_name    = optional(string, null)<br>  }))</pre> | `[]` | no |
+| <a name="input_volumes"></a> [volumes](#input\_volumes) | List for mounting volumes in the container. | <pre>list(object({<br/>    container_path = optional(string, null)<br/>    from_container = optional(string, null)<br/>    host_path      = optional(string, null)<br/>    read_only      = optional(bool, false)<br/>    volume_name    = optional(string, null)<br/>  }))</pre> | `[]` | no |
 
 ## Outputs
 
@@ -102,7 +103,7 @@ module "service" {
 |------|-------------|
 | <a name="output_docker_image_id"></a> [docker\_image\_id](#output\_docker\_image\_id) | The ID of the image. |
 | <a name="output_docker_image_name"></a> [docker\_image\_name](#output\_docker\_image\_name) | The name of the Docker image. |
-<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+<!-- END_TF_DOCS -->
 
 ## Contribute
 
