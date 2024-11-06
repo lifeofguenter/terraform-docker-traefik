@@ -54,7 +54,7 @@ module "service" {
 | Name | Version |
 |------|---------|
 | <a name="provider_docker"></a> [docker](#provider\_docker) | 3.0.2 |
-| <a name="provider_time"></a> [time](#provider\_time) | 0.12.0 |
+| <a name="provider_time"></a> [time](#provider\_time) | 0.12.1 |
 
 ## Resources
 
