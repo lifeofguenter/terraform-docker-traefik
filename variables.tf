@@ -180,3 +180,9 @@ variable "header_sts" {
   })
   default = null
 }
+
+variable "networks" {
+  description = "List of networks to connect to."
+  type        = list(string)
+  default     = []
+}
