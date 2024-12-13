@@ -131,6 +131,13 @@ resource "docker_container" "main" {
     }
   }
 
+  dynamic "networks_advanced" {
+    for_each = var.networks
+    content {
+      name = networks_advanced.value
+    }
+  }
+
   dynamic "labels" {
     for_each = var.traefik_network != null ? [1] : []
     content {
