@@ -22,6 +22,7 @@ variable "environment" {
   description = "The environment variables to pass to a container."
   type        = map(string)
   default     = {}
+  sensitive   = true
 }
 
 variable "service_network" {
