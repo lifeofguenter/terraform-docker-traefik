@@ -89,14 +89,20 @@ resource "docker_container" "main" {
   }
 
   ### Listener Rule
-  labels {
-    label = "traefik.http.routers.${local.router_name_http}.rule"
-    value = var.listener_rule
+  dynamic "labels" {
+    for_each = length(var.http_entrypoints) > 0 ? [1] : []
+    content {
+      label = "traefik.http.routers.${local.router_name_http}.rule"
+      value = var.listener_rule
+    }
   }
 
-  labels {
-    label = "traefik.http.routers.${local.router_name_https}.rule"
-    value = var.listener_rule
+  dynamic "labels" {
+    for_each = length(var.https_entrypoints) > 0 ? [1] : []
+    content {
+      label = "traefik.http.routers.${local.router_name_https}.rule"
+      value = var.listener_rule
+    }
   }
 
   ### Middlewares
@@ -256,14 +262,20 @@ resource "docker_container" "main" {
   }
 
   ### Red/black ###
-  labels {
-    label = "traefik.http.routers.${local.router_name_http}.priority"
-    value = var.revision
+  dynamic "labels" {
+    for_each = length(var.http_entrypoints) > 0 ? [1] : []
+    content {
+      label = "traefik.http.routers.${local.router_name_http}.priority"
+      value = var.revision
+    }
   }
 
-  labels {
-    label = "traefik.http.routers.${local.router_name_https}.priority"
-    value = var.revision
+  dynamic "labels" {
+    for_each = length(var.https_entrypoints) > 0 ? [1] : []
+    content {
+      label = "traefik.http.routers.${local.router_name_https}.priority"
+      value = var.revision
+    }
   }
 
   dynamic "healthcheck" {

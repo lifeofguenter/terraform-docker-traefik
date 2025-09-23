@@ -1,0 +1,6 @@
+formatter: md
+
+sections:
+  hide:
+    - providers
+    - modules
