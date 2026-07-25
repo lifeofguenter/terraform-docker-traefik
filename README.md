@@ -46,15 +46,15 @@ module "service" {
 ## Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
-| <a name="requirement_docker"></a> [docker](#requirement\_docker) | ~> 3.0 |
-| <a name="requirement_time"></a> [time](#requirement\_time) | ~> 0.13 |
+| <a name="requirement_docker"></a> [docker](#requirement\_docker) | >= 3.0 |
+| <a name="requirement_time"></a> [time](#requirement\_time) | >= 0.13 |
 
 ## Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [docker_container.main](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/container) | resource |
 | [docker_image.main](https://registry.terraform.io/providers/kreuzwerker/docker/latest/docs/resources/image) | resource |
 | [time_sleep.grace](https://registry.terraform.io/providers/hashicorp/time/latest/docs/resources/sleep) | resource |
@@ -63,7 +63,7 @@ module "service" {
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_basic_auth_users"></a> [basic\_auth\_users](#input\_basic\_auth\_users) | List of authorized users. | `list(string)` | `[]` | no |
 | <a name="input_cert_sans"></a> [cert\_sans](#input\_cert\_sans) | List of SANs for the cert. | `list(string)` | `[]` | no |
 | <a name="input_certresolver"></a> [certresolver](#input\_certresolver) | Name of certificate resolver. | `string` | `null` | no |
@@ -96,7 +96,7 @@ module "service" {
 ## Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_docker_image_id"></a> [docker\_image\_id](#output\_docker\_image\_id) | The ID of the image. |
 | <a name="output_docker_image_name"></a> [docker\_image\_name](#output\_docker\_image\_name) | The name of the Docker image. |
 <!-- END_TF_DOCS -->
