@@ -137,6 +137,12 @@ variable "entrypoint" {
   default     = []
 }
 
+variable "cpus" {
+  description = "Specify how much of the available CPU resources a container can use."
+  type        = string
+  default     = null
+}
+
 variable "cpu_set" {
   description = "A comma-separated list or hyphen-separated range of CPUs a container can use."
   type        = string

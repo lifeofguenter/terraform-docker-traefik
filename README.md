@@ -71,6 +71,7 @@ module "service" {
 | <a name="input_container_port"></a> [container\_port](#input\_container\_port) | Explicit container port to forward traffic to. | `number` | `null` | no |
 | <a name="input_cpu_set"></a> [cpu\_set](#input\_cpu\_set) | A comma-separated list or hyphen-separated range of CPUs a container can use. | `string` | `null` | no |
 | <a name="input_cpu_shares"></a> [cpu\_shares](#input\_cpu\_shares) | CPU shares (relative weight) for the container. | `number` | `null` | no |
+| <a name="input_cpus"></a> [cpus](#input\_cpus) | Specify how much of the available CPU resources a container can use. | `string` | `null` | no |
 | <a name="input_deregistration_delay"></a> [deregistration\_delay](#input\_deregistration\_delay) | Amount of seconds to wait for open connections to drain before stopping the container. | `number` | `60` | no |
 | <a name="input_entrypoint"></a> [entrypoint](#input\_entrypoint) | The command to use as the Entrypoint for the container. | `list(string)` | `[]` | no |
 | <a name="input_environment"></a> [environment](#input\_environment) | The environment variables to pass to a container. | `map(string)` | `{}` | no |
